@@ -78,7 +78,7 @@ async def startup_event():
             'scaler': 'models/scaler.sav',
             'encoder': 'models/encoder_model.h5',
             'decoder': 'models/decoder_model.h5',
-            'metadata': 'models/model_metadata.json'
+            'metadata': 'models/metadata.json'
         }
         
         missing_files = []
