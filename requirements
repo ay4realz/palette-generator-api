@@ -1,0 +1,13 @@
+fastapi==0.104.1
+uvicorn[standard]==0.24.0
+tensorflow==2.13.0
+scikit-learn==1.3.2
+pandas==2.0.3
+numpy==1.24.4
+joblib==1.3.2
+python-multipart==0.0.6
+pydantic==2.5.0
+python-json-logger==2.0.7
+colorspacious==1.1.2
+Pillow==10.0.1
+aiofiles==23.2.1

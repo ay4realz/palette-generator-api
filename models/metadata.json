@@ -1,0 +1,23 @@
+{
+  "created_at": "2025-08-21T02:25:55.279268",
+  "total_palettes": 5773,
+  "total_colors": 29379,
+  "gmm_components": 18,
+  "deep_model": {
+    "input_dim": 18,
+    "latent_dim": 32,
+    "architecture": "autoencoder"
+  },
+  "data_stats": {
+    "lab_means": [
+      69.82454095019418,
+      -53.77671992632882,
+      11.529529862939674
+    ],
+    "lab_stds": [
+      24.113702687834923,
+      33.151146063042766,
+      26.13288580343052
+    ]
+  }
+}
