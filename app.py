@@ -69,6 +69,9 @@ class PaletteResponse(BaseModel):
 @app.on_event("startup")
 async def startup_event():
     """Load all models and metadata on startup"""
+    logger.info(f"Current working directory: {os.getcwd()}")
+    logger.info(f"Files in /app/models: {os.listdir('models') if os.path.exists('models') else 'No models dir'}")
+
     try:
         logger.info("Loading models...")
         
