@@ -148,9 +148,12 @@ async def generate_ai_palette(method: str, num_colors: int, style: str, seed: Op
     
     try:
         if method == "gmm" and models['gmm'] is not None:
-            # Generate using Gaussian Mixture Model
-            samples, _ = models['gmm'].sample(num_colors)
+            # Add some randomness by sampling more and shuffling
+            samples, _ = models['gmm'].sample(num_colors * 3)
+            np.random.shuffle(samples)
+            samples = samples[:num_colors]
             lab_colors = apply_style_modifications(samples, style)
+
             
         elif method == "deep" and models['encoder'] is not None and models['decoder'] is not None:
             # Generate using deep learning model
