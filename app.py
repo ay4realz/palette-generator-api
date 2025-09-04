@@ -156,12 +156,15 @@ async def generate_ai_palette(method: str, num_colors: int, style: str, seed: Op
 
             
         elif method == "deep" and models['encoder'] is not None and models['decoder'] is not None:
-            # Generate using deep learning model
-            latent_dim = 64  # From your model architecture
+            # Get correct latent dimension from metadata
+            latent_dim = model_metadata.get("deep_model", {}).get("latent_dim", 32)
+            # Sample latent vector
             latent_sample = np.random.normal(0, 1, (1, latent_dim))
+            # Decode to LAB color space
             generated = models['decoder'].predict(latent_sample, verbose=0)
             generated = models['scaler'].inverse_transform(generated)
-            samples = generated.reshape(6, 3)[:num_colors]
+            # Reshape to num_colors x 3 (LAB format)
+            samples = generated.reshape(-1, 3)[:num_colors]
             lab_colors = apply_style_modifications(samples, style)
             
         else:
