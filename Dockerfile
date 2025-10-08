@@ -1,29 +1,30 @@
-# Use a stable Python image compatible with TensorFlow and SciPy
+# Use official lightweight Python image (TensorFlow-compatible)
 FROM python:3.10-slim
 
-# Prevent interactive prompts
+# Avoid interactive prompts during install
 ENV DEBIAN_FRONTEND=noninteractive
 
 # Set working directory
 WORKDIR /app
 
-# Install system dependencies (build tools + gfortran + git)
-RUN apt-get update && apt-get install -y \
+# Install system dependencies needed by SciPy and TensorFlow
+RUN apt-get update && apt-get install -y --no-install-recommends \
     build-essential \
     gfortran \
-    python3-dev \
-    git \
+    libatlas-base-dev \
+    liblapack-dev \
+    libblas-dev \
     && rm -rf /var/lib/apt/lists/*
 
-# Copy your project files
+# Copy files to container
 COPY . /app
 
-# Install Python dependencies
+# Upgrade pip and install dependencies
 RUN pip install --upgrade pip
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Expose the port Render expects
+# Expose Render's default port
 EXPOSE 10000
 
-# Run the FastAPI app using Uvicorn
+# Start the FastAPI app
 CMD ["uvicorn", "app:app", "--host", "0.0.0.0", "--port", "10000"]
